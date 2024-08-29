@@ -50,6 +50,21 @@ blogsRouter.put("/:id", async (req, res) => {
 });
 
 blogsRouter.delete("/:id", async (req, res) => {
+  const decodedToken = jwt.verify(req.token, process.env.SECRET);
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: "token invalid" });
+  }
+  const blog = await Blog.findById(req.params.id);
+  if (!blog) {
+    return res.status(404).json({ error: "blog not found" });
+  }
+
+  if (blog.user.toString() !== decodedToken.id.toString()) {
+    return res
+      .status(403)
+      .json({ error: "only the creator can delete the blog" });
+  }
+
   await Blog.findByIdAndDelete(req.params.id);
   res.status(204).end();
 });
