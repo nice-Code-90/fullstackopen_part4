@@ -1,3 +1,5 @@
+require("express-async-errors");
+
 const config = require("./utils/config");
 const usersRouter = require("./controllers/users");
 
