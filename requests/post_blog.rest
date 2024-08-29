@@ -1,0 +1,12 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hejkwIiwiaWQiOiI2NmQwNDdiZDAwNjE2ZjQ0MjY3Mzc1ZmIiLCJpYXQiOjE3MjQ5NDcwNTB9.-3KtioWWrH2oFx6kaI3AfJoJChda3RpSZgVtSTerFmE
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "likes":"20",
+    "author":"J.K Rowling",
+    "url":"www.dummy.com",
+    "title": "Harry Potter"
+}
