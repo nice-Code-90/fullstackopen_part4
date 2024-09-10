@@ -74,6 +74,10 @@ blogsRouter.put("/:id", async (req, res) => {
 });
 
 blogsRouter.delete("/:id", async (req, res) => {
+  const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET);
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: "token invalid" });
+  }
   const user = req.user;
 
   if (!user) {
